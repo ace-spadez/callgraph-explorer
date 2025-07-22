@@ -69,13 +69,19 @@ export const CodeEditor: React.FC<CodeEditorProps> = ({ function: func, highligh
     if (viewRef.current && highlightLines.length > 0) {
       // Scroll to highlighted line
       const location = highlightLines[0];
-      const line = Math.max(1, location.start_line);
-      const pos = viewRef.current.state.doc.line(line).from;
+      const totalLines = viewRef.current.state.doc.lines;
+      const line = Math.min(Math.max(1, location.start_line), totalLines);
       
-      viewRef.current.dispatch({
-        selection: { anchor: pos, head: pos },
-        scrollIntoView: true
-      });
+      try {
+        const pos = viewRef.current.state.doc.line(line).from;
+        
+        viewRef.current.dispatch({
+          selection: { anchor: pos, head: pos },
+          scrollIntoView: true
+        });
+      } catch (error) {
+        console.warn('Could not scroll to line:', line, 'in', totalLines, 'line document');
+      }
     }
   }, [highlightLines]);
 

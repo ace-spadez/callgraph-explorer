@@ -112,15 +112,15 @@ if __name__ == "__main__":
       return_type: "bool"
     },
     calls: [
-      { function_id: "create_connection_pool", called_at_location: { file: "database/connection.py", start_line: 20, end_line: 20, character_start: 9, character_end: 31 }, context: "pool = create_connection_pool()" },
-      { function_id: "validate_schema", called_at_location: { file: "database/connection.py", start_line: 22, end_line: 22, character_start: 4, character_end: 19 }, context: "validate_schema(pool)" },
-      { function_id: "setup_migrations", called_at_location: { file: "database/connection.py", start_line: 24, end_line: 24, character_start: 4, character_end: 20 }, context: "setup_migrations()" }
+      { function_id: "create_connection_pool", called_at_location: { file: "database/connection.py", start_line: 11, end_line: 11, character_start: 9, character_end: 31 }, context: "pool = create_connection_pool()" },
+      { function_id: "validate_schema", called_at_location: { file: "database/connection.py", start_line: 13, end_line: 13, character_start: 4, character_end: 19 }, context: "validate_schema(pool)" },
+      { function_id: "setup_migrations", called_at_location: { file: "database/connection.py", start_line: 15, end_line: 15, character_start: 4, character_end: 20 }, context: "setup_migrations()" }
     ],
     is_classmethod: false,
     is_property: false,
     external_variables_used: [
       { name: "DATABASE_URL", type: "str", line: 5 },
-      { name: "logger", type: "Logger", line: 18 }
+      { name: "logger", type: "Logger", line: 9 }
     ],
     references: [
       { function_id: "main", called_at_location: { file: "app/main.py", start_line: 8, end_line: 8, character_start: 4, character_end: 23 }, context: "initialize_database()" }

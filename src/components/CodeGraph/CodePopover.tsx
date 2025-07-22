@@ -62,13 +62,19 @@ export const CodePopover: React.FC<CodePopoverProps> = ({ function: func, locati
 
     // Scroll to the highlighted location if provided
     if (location && viewRef.current) {
-      const line = Math.max(1, location.start_line);
-      const pos = viewRef.current.state.doc.line(line).from;
+      const totalLines = viewRef.current.state.doc.lines;
+      const line = Math.min(Math.max(1, location.start_line), totalLines);
       
-      viewRef.current.dispatch({
-        selection: { anchor: pos, head: pos },
-        scrollIntoView: true
-      });
+      try {
+        const pos = viewRef.current.state.doc.line(line).from;
+        
+        viewRef.current.dispatch({
+          selection: { anchor: pos, head: pos },
+          scrollIntoView: true
+        });
+      } catch (error) {
+        console.warn('Could not scroll to line:', line, 'in', totalLines, 'line document');
+      }
     }
 
     return () => {
