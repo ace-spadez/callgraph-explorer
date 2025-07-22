@@ -8,35 +8,61 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Code analysis theme - Dark with vibrant accents */
+    --background: 218 23% 6%;
+    --foreground: 213 31% 91%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 217 19% 9%;
+    --card-foreground: 213 31% 91%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 217 19% 9%;
+    --popover-foreground: 213 31% 91%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 262 83% 58%;
     --primary-foreground: 210 40% 98%;
+    --primary-glow: 262 83% 68%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 215 25% 27%;
+    --secondary-foreground: 213 31% 91%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 215 25% 15%;
+    --muted-foreground: 217 10% 64%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 175 70% 41%;
+    --accent-foreground: 210 40% 98%;
+    --accent-glow: 175 70% 51%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 215 25% 18%;
+    --input: 215 25% 18%;
+    --ring: 262 83% 58%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Code-specific colors */
+    --code-bg: 217 19% 12%;
+    --code-selection: 262 83% 58% / 0.3;
+    --code-highlight: 175 70% 41% / 0.2;
+    --node-focused: 262 83% 58% / 0.1;
+    --node-hover: 175 70% 41% / 0.1;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(262 83% 58%), hsl(262 83% 68%));
+    --gradient-accent: linear-gradient(135deg, hsl(175 70% 41%), hsl(175 70% 51%));
+    --gradient-node: linear-gradient(145deg, hsl(217 19% 12%), hsl(217 19% 16%));
+    --gradient-subtle: linear-gradient(180deg, hsl(217 19% 9%), hsl(217 19% 7%));
+
+    /* Shadows */
+    --shadow-glow: 0 0 20px hsl(262 83% 58% / 0.3);
+    --shadow-accent-glow: 0 0 20px hsl(175 70% 41% / 0.3);
+    --shadow-node: 0 4px 12px hsl(0 0% 0% / 0.4);
+    --shadow-elevated: 0 8px 32px hsl(0 0% 0% / 0.6);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --sidebar-background: 0 0% 98%;
 
@@ -91,6 +117,65 @@ All colors MUST be HSL.
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'JetBrains Mono', 'Monaco', 'Consolas', monospace;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--accent));
+  }
+
+  /* Animations */
+  @keyframes glow-pulse {
+    0%, 100% {
+      box-shadow: var(--shadow-glow);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(262 83% 58% / 0.5);
+    }
+  }
+
+  @keyframes accent-pulse {
+    0%, 100% {
+      box-shadow: var(--shadow-accent-glow);
+    }
+    50% {
+      box-shadow: 0 0 30px hsl(175 70% 41% / 0.5);
+    }
+  }
+
+  .animate-glow-pulse {
+    animation: glow-pulse 2s ease-in-out infinite;
+  }
+
+  .animate-accent-pulse {
+    animation: accent-pulse 2s ease-in-out infinite;
   }
 }
 

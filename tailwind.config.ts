@@ -26,7 +26,8 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					glow: 'hsl(var(--primary-glow))'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -42,7 +43,8 @@ export default {
 				},
 				accent: {
 					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					foreground: 'hsl(var(--accent-foreground))',
+					glow: 'hsl(var(--accent-glow))'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -61,7 +63,32 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				code: {
+					bg: 'hsl(var(--code-bg))',
+					selection: 'hsl(var(--code-selection))',
+					highlight: 'hsl(var(--code-highlight))'
+				},
+				node: {
+					focused: 'hsl(var(--node-focused))',
+					hover: 'hsl(var(--node-hover))'
 				}
+			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-accent': 'var(--gradient-accent)',
+				'gradient-node': 'var(--gradient-node)',
+				'gradient-subtle': 'var(--gradient-subtle)'
+			},
+			boxShadow: {
+				glow: 'var(--shadow-glow)',
+				'accent-glow': 'var(--shadow-accent-glow)',
+				node: 'var(--shadow-node)',
+				elevated: 'var(--shadow-elevated)'
+			},
+			transitionTimingFunction: {
+				smooth: 'var(--transition-smooth)',
+				bounce: 'var(--transition-bounce)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
