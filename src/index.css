@@ -177,6 +177,35 @@ All colors MUST be HSL.
   .animate-accent-pulse {
     animation: accent-pulse 2s ease-in-out infinite;
   }
+
+  /* React Flow customizations */
+  .react-flow__controls {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+  }
+
+  .react-flow__controls button {
+    background: hsl(var(--card));
+    border-bottom: 1px solid hsl(var(--border));
+    color: hsl(var(--foreground));
+  }
+
+  .react-flow__controls button:hover {
+    background: hsl(var(--accent));
+    color: hsl(var(--accent-foreground));
+  }
+
+  .react-flow__background {
+    background: hsl(var(--background));
+  }
+
+  .react-flow__node.selectable:hover {
+    box-shadow: var(--shadow-accent-glow);
+  }
+
+  .react-flow__node.selected {
+    box-shadow: var(--shadow-glow);
+  }
 }
 
 @layer base {
