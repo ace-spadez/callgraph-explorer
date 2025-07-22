@@ -1,5 +1,5 @@
 import React from 'react';
-import { Call } from '@/data/mockPythonProject';
+import { Call, mockFunctions } from '@/data/mockPythonProject';
 import { ChevronDown } from 'lucide-react';
 
 interface CallNodesProps {
@@ -29,25 +29,31 @@ export const CallNodes: React.FC<CallNodesProps> = ({
       </div>
       
       <div className="flex space-x-3 overflow-x-auto">
-        {calls.map((call, index) => (
-          <div
-            key={`${call.function_id}-${index}`}
-            className={`
-              flex-shrink-0 px-4 py-2 rounded-lg border text-sm cursor-pointer
-              transition-all duration-200 hover:scale-105
-              ${focusedIndex === index 
-                ? 'bg-accent border-accent text-accent-foreground shadow-accent-glow' 
-                : 'bg-card border-border text-card-foreground hover:bg-node-hover hover:border-accent'
-              }
-            `}
-            onClick={() => onFunctionSelect(call.function_id)}
-          >
-            <div className="font-medium">{call.function_id}</div>
-            <div className="text-xs opacity-70 mt-1">
-              Line {call.called_at_location.start_line}
+        {calls.map((call, index) => {
+          // Only show calls that have valid functions
+          const isValidFunction = mockFunctions[call.function_id];
+          if (!isValidFunction) return null;
+          
+          return (
+            <div
+              key={`${call.function_id}-${index}`}
+              className={`
+                flex-shrink-0 px-4 py-2 rounded-lg border text-sm cursor-pointer
+                transition-all duration-200 hover:scale-105
+                ${focusedIndex === index 
+                  ? 'bg-accent border-accent text-accent-foreground shadow-accent-glow' 
+                  : 'bg-card border-border text-card-foreground hover:bg-node-hover hover:border-accent'
+                }
+              `}
+              onClick={() => onFunctionSelect(call.function_id)}
+            >
+              <div className="font-medium">{call.function_id}</div>
+              <div className="text-xs opacity-70 mt-1">
+                Line {call.called_at_location.start_line}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        }).filter(Boolean)}
       </div>
     </div>
   );

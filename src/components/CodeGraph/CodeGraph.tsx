@@ -40,8 +40,10 @@ export const CodeGraph: React.FC = () => {
         if (focusState.type === 'main' && currentFunction.references.length > 0) {
           const firstRef = currentFunction.references[0];
           const refFunction = mockFunctions[firstRef.function_id];
-          setFocusState({ type: 'reference', index: 0, functionId: firstRef.function_id });
-          setPopoverData({ function: refFunction, location: firstRef.called_at_location });
+          if (refFunction) {
+            setFocusState({ type: 'reference', index: 0, functionId: firstRef.function_id });
+            setPopoverData({ function: refFunction, location: firstRef.called_at_location });
+          }
         } else if (focusState.type === 'call') {
           setFocusState({ type: 'main', index: 0 });
           setPopoverData(null);
@@ -53,10 +55,10 @@ export const CodeGraph: React.FC = () => {
         if (focusState.type === 'main' && currentFunction.calls.length > 0) {
           const firstCall = currentFunction.calls[0];
           const callFunction = mockFunctions[firstCall.function_id];
-          setFocusState({ type: 'call', index: 0, functionId: firstCall.function_id });
-          setPopoverData({ function: callFunction, location: firstCall.called_at_location });
-          // Highlight arguments used by this call
           if (callFunction) {
+            setFocusState({ type: 'call', index: 0, functionId: firstCall.function_id });
+            setPopoverData({ function: callFunction, location: firstCall.called_at_location });
+            // Highlight arguments used by this call
             setHighlightedArgs(callFunction.signature.parameters.map(p => p.name));
           }
         } else if (focusState.type === 'reference') {
@@ -70,15 +72,17 @@ export const CodeGraph: React.FC = () => {
           const newIndex = focusState.index - 1;
           const ref = currentFunction.references[newIndex];
           const refFunction = mockFunctions[ref.function_id];
-          setFocusState({ type: 'reference', index: newIndex, functionId: ref.function_id });
-          setPopoverData({ function: refFunction, location: ref.called_at_location });
+          if (refFunction) {
+            setFocusState({ type: 'reference', index: newIndex, functionId: ref.function_id });
+            setPopoverData({ function: refFunction, location: ref.called_at_location });
+          }
         } else if (focusState.type === 'call' && focusState.index > 0) {
           const newIndex = focusState.index - 1;
           const call = currentFunction.calls[newIndex];
           const callFunction = mockFunctions[call.function_id];
-          setFocusState({ type: 'call', index: newIndex, functionId: call.function_id });
-          setPopoverData({ function: callFunction, location: call.called_at_location });
           if (callFunction) {
+            setFocusState({ type: 'call', index: newIndex, functionId: call.function_id });
+            setPopoverData({ function: callFunction, location: call.called_at_location });
             setHighlightedArgs(callFunction.signature.parameters.map(p => p.name));
           }
         }
@@ -89,15 +93,17 @@ export const CodeGraph: React.FC = () => {
           const newIndex = focusState.index + 1;
           const ref = currentFunction.references[newIndex];
           const refFunction = mockFunctions[ref.function_id];
-          setFocusState({ type: 'reference', index: newIndex, functionId: ref.function_id });
-          setPopoverData({ function: refFunction, location: ref.called_at_location });
+          if (refFunction) {
+            setFocusState({ type: 'reference', index: newIndex, functionId: ref.function_id });
+            setPopoverData({ function: refFunction, location: ref.called_at_location });
+          }
         } else if (focusState.type === 'call' && focusState.index < currentFunction.calls.length - 1) {
           const newIndex = focusState.index + 1;
           const call = currentFunction.calls[newIndex];
           const callFunction = mockFunctions[call.function_id];
-          setFocusState({ type: 'call', index: newIndex, functionId: call.function_id });
-          setPopoverData({ function: callFunction, location: call.called_at_location });
           if (callFunction) {
+            setFocusState({ type: 'call', index: newIndex, functionId: call.function_id });
+            setPopoverData({ function: callFunction, location: call.called_at_location });
             setHighlightedArgs(callFunction.signature.parameters.map(p => p.name));
           }
         }
